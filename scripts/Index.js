@@ -52,7 +52,6 @@ class ListLeagues extends React.Component {
 		$.ajax({
 			type: "GET",
 			url: "/api/soccerLeagues",
-			async: false,
 			cache: false,
 			success: function(data) {
 				this.setState({leagues: data});
@@ -64,7 +63,8 @@ class ListLeagues extends React.Component {
 	}
 
 	render() {
-		return (<div className="container">
+		if(this.state.leagues.length > 0) {
+			return (<div className="container">
 					<div className="row">
 						<div className="col-md-12">
     		 				{
@@ -79,7 +79,9 @@ class ListLeagues extends React.Component {
     		 			</div>
 			 		</div>
 		 		</div>
-				);
+				);	
+		}
+		return (<div></div>);
 	}
 };
 
@@ -133,7 +135,6 @@ class LeagueDetail extends React.Component {
 		$.ajax({
 			type: "GET",
 			url: URL,
-			async: false,
 			cache: false,
 			success: function(data) {
 				this.setState({ league: data });
@@ -145,7 +146,8 @@ class LeagueDetail extends React.Component {
 	}
 
 	render() {
-		return (<div className="container">
+		if(this.state.league.name){
+			return (<div className="container">
 					<div className="row">
 						<div className="col-md-12">
 							<div className="mt-20 league-card">
@@ -154,7 +156,9 @@ class LeagueDetail extends React.Component {
 							</div>
 						</div>
 					</div>
-				</div>);
+				</div>);	
+		}
+		return (<div></div>);
 	}
 }
 

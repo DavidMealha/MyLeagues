@@ -16,9 +16,9 @@ app.listen(port);
 
 //connect to database
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost:27017/soccerDB');
-mongoose.connect('mongodb://User:user@ds139122.mlab.com:39122/myleaguestransferseu');
-console.log("connect to mlab");
+mongoose.connect('mongodb://localhost:27017/soccerDB');
+//mongoose.connect('mongodb://User:user@ds139122.mlab.com:39122/myleaguestransferseu');
+//console.log("connect to mlab");
 var SoccerLeague = require("./app/models/soccerLeague");
 
 //routing
