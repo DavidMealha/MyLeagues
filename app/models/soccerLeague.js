@@ -17,4 +17,9 @@ SoccerLeagueSchema.statics.findByName = function(qname, cb){
 	return this.find({ name: qname }, cb);
 }
 
+SoccerLeagueSchema.statics.findByIdentifier = function(id, cb){
+    console.log("this is the id: " + id);
+    return this.find({ _id: id }, cb);   
+}
+
 module.exports = mongoose.model('SoccerLeagues', SoccerLeagueSchema);

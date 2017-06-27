@@ -39,10 +39,10 @@ router.get('/',function(req,res){
 router.route('/api/soccerLeagues')
 	//GET /api/soccerLeagues
     .get(function(req, res) {
-        SoccerLeague.find(function(err, bears) {
+        SoccerLeague.find(function(err, leagues) {
             if (err)
                 res.send(err);
-            res.json(bears);
+            res.json(leagues);
         });
     })
     //POST /api/soccerLeagues
@@ -63,13 +63,13 @@ router.route('/api/soccerLeagues')
     	res.json({ message: 'Soccer League created!'});
     });
 
-router.route('/api/soccerLeagues/:league_name')
+router.route('/api/soccerLeagues/:league_id')
 	//GET /api/soccerLeagues/:league_name
 	.get(function(req, res) {
-        SoccerLeague.findByName(req.params.league_name, function(err, soccerLeague) {
+        SoccerLeague.findById(req.params.league_id, function(err, leagueDetail) {
             if (err)
                 res.send(err);
-            res.json(soccerLeague);
+            res.json(leagueDetail);
         });
     });
 

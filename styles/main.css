@@ -37,6 +37,9 @@ hr {
 
 hr {
 	border: 1px solid lightgrey;
+	margin: 10px 0;
+	margin-left: -20px;
+    margin-right: -20px;
 }
 
 /* Helpers */
@@ -139,8 +142,7 @@ hr {
 /* League item styles */
 .league-card {
 	background-color: #fff;
-	padding: 10px;
-	height: 200px;
+	padding: 10px 20px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 2px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -153,7 +155,7 @@ hr {
     position: relative;
     display: block;
     max-width: 100%;
-    max-height: 130px;
+    max-height: 100px;
 }
 
 .flag-icon-background {
@@ -162,17 +164,18 @@ hr {
 
 @-webkit-keyframes bounce { 
 	0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
-	40% {-webkit-transform: translateY(-30px);} 
-	60% {-webkit-transform: translateY(-15px);} 
+	40% {-webkit-transform: translateY(-5px);} 
+	60% {-webkit-transform: translateY(-5px);} 
 } 
          
 @keyframes bounce { 
 	0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
-	40% {transform: translateY(-30px);} 
-	60% {transform: translateY(-15px);} 
+	40% {transform: translateY(-5px);} 
+	60% {transform: translateY(-5px);} 
 }
          
 .bounce { 
-	-webkit-animation: bounce 2s; 
-	animation: bounce 2s; 
+	-webkit-animation: bounce 2s infinite; 
+	animation: bounce 2s infinite; 
+	height: 20px;
 }
