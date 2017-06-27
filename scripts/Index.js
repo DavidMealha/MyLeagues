@@ -9,7 +9,7 @@ class App extends React.Component {
 	render() {
 		return (<div>
 					<Navbar />
-					<div className="mt-90">
+					<div className="mt-90 mb-50">
 						{this.props.children}
 					</div>
 				</div>);
@@ -116,7 +116,7 @@ class SeeMoreLeagueDetails extends React.Component {
 					<div className="col-md-12 text-center">
 						<img className="bounce" src="https://d30y9cdsu7xlg0.cloudfront.net/png/10897-200.png" />
 						<br/>
-						<Link to={"/Leagues/" + this.props.id  }>Ver ultimas novidades</Link>
+						<Link to={"/Leagues/" + this.props.id  }>See latest news!</Link>
 					</div>
 				</div>);
 	}
