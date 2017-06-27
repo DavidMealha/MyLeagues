@@ -57,7 +57,7 @@ class ListLeagues extends React.Component {
 				this.setState({leagues: data});
 			}.bind(this),
 			error: function(xhr, status, err) {
-				console.error(this.props.url, status, err.toString());
+				console.log(this.props.url, status, err.toString());
 			}.bind(this)
 		});
 	}

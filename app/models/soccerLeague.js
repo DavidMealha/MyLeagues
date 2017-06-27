@@ -13,6 +13,10 @@ var SoccerLeagueSchema = new Schema({
     }
 });
 
+SoccerLeagueSchema.statics.findAll = function(cb){
+    return this.find({}, cb);
+}
+
 SoccerLeagueSchema.statics.findByName = function(qname, cb){
 	return this.find({ name: qname }, cb);
 }
@@ -22,4 +26,4 @@ SoccerLeagueSchema.statics.findByIdentifier = function(id, cb){
     return this.find({ _id: id }, cb);   
 }
 
-module.exports = mongoose.model('SoccerLeagues', SoccerLeagueSchema);
+module.exports = mongoose.model('soccerleagues', SoccerLeagueSchema);
