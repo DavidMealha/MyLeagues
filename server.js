@@ -88,7 +88,7 @@ conn.once('open', function() {
                 access_token_secret: 'LdmCWIhFjCaDvw3vyu9XfL6y2oSDJM7s2DJEl0v7bJwqL'
             });
 
-            client.get('search/tweets', {q: req.params.query, result_type: 'mixed'}, function(error, tweets, response){
+            client.get('search/tweets', {q: req.params.query, result_type: 'recent popular mixed', count: 25}, function(error, tweets, response){
                 res.json(tweets);
             });
         });
