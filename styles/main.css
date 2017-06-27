@@ -179,3 +179,13 @@ hr {
 	animation: bounce 2s infinite; 
 	height: 20px;
 }
+
+.news-title {
+	width: 80%;
+	display: inline-block;
+}
+
+.small-image {
+	margin-left: 15px;
+	height: 25px;
+}

@@ -133,33 +133,15 @@ class LeagueDetail extends React.Component {
 		$.ajax({
 			type: "GET",
 			url: URL,
+			async: false,
 			cache: false,
 			success: function(data) {
 				this.setState({ league: data });
-
-				var API_URL = "https://www.reddit.com/r/soccer/search.json?";
-				var PARAMETERIZED_URL = API_URL + "q=" + this.state.league.name + "&sort=" + "relevance";
-
-				$.ajax({
-					method: "GET",
-					url: PARAMETERIZED_URL,
-					dataType: "json",
-					async: false,
-					cache: false,
-					success: function(data) {
-						this.setState({ results: data });
-					}.bind(this),
-					error: function(xhr, status, err) {
-						console.error(this.props.url, status, err.toString());
-					}.bind(this)
-				});
-
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
 			}.bind(this)
 		});
-
 	}
 
 	render() {
@@ -168,7 +150,7 @@ class LeagueDetail extends React.Component {
 						<div className="col-md-12">
 							<div className="mt-20 league-card">
 								<LeagueItem item={this.state.league} />
-								<OtherSourcesContainer results={ this.state.results }/>
+								<RedditContainer query={this.state.league.name} />
 							</div>
 						</div>
 					</div>
@@ -176,16 +158,55 @@ class LeagueDetail extends React.Component {
 	}
 }
 
-class OtherSourcesContainer extends React.Component {
+class RedditContainer extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { results: [] };
+
+	}
+
+	componentWillMount() {
+		var API_URL = "https://www.reddit.com/r/soccer/search.json?";
+		var PARAMETERIZED_URL = API_URL + "q=transfers " + this.props.query + "&sort=" + "new&limit=10";
+
+		console.log(PARAMETERIZED_URL);
+		$.ajax({
+			method: "GET",
+			url: PARAMETERIZED_URL,
+			dataType: "json",
+			cache: false,
+			success: function(data) {
+				this.setState({ results: data.data.children });
+				console.log(data);
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.error(this.props.url, status, err.toString());
+			}.bind(this)
+		});
+	}
+
 	render() {
-		return (<div>
-					{ this.props.results.map(
-						item=>(
-								<span>item.url</span>
+		console.log(this.state.results.length);
+		console.log(this.state.results);
+		if(this.state.results.length > 0) {
+			return (<div>
+					{ 
+						this.state.results.map(
+							item => (<div>
+										<h4 className="news-title">{item.data.title}</h4>
+										<img className="small-image" src="/images/reddit.png" />
+										<br/>
+										<a className="news-link" href={"https://www.reddit.com" + item.data.permalink} target="_blank">See more</a>
+										<hr/>
+									</div>
 							)
 						) 
 					}
-				</div>)
+				</div>);
+		}else{
+			return (<div></div>);	
+		}
+		
 	}
 }
 
