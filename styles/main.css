@@ -1,0 +1,178 @@
+/*Fonts
+@font-face
+{
+	font-family: OpenSans;
+	src: url('../fonts/OpenSans-Regular.ttf');
+}
+@font-face
+{
+	font-family: BebasNeue;
+	src: url('../fonts/BebasNeue.otf');
+}*/
+
+/* HTML Elements styles */
+body {
+	background-color: #f3efef;
+	font-family: Lato;
+}
+
+hr {
+	border: 1px solid black;	
+}
+
+/* General Application Controls */
+.btn-main {
+	width: 100%;
+	background-color: #355C7D;
+	color: white;
+	transition: ease-in 0.3s;
+	
+}
+
+.btn-main:hover {
+	width: 100%;
+	background-color: #12314c;
+	color: white;
+}
+
+hr {
+	border: 1px solid lightgrey;
+}
+
+/* Helpers */
+.mt-10 {
+	margin-top: 10px;
+}
+
+.mt-20 {
+	margin-top: 20px;
+}
+
+.mt-30 {
+	margin-top: 30px;
+}
+
+.mt-70 {
+	margin-top: 70px;
+}
+
+.mt-90 {
+	margin-top: 90px;
+}
+
+.mb-10 {
+	margin-bottom: 10px;
+}
+
+.mr-10 {
+	margin-right: 10px;
+}	
+
+.display-none {
+	display: none !important;
+}
+
+.display-blocl {
+	display: block;
+}
+
+/* Home styles */
+.navbar-home {
+	background-color: #fff;
+	margin: 0;
+	height: 70px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.01), 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+}
+
+.navbar-default .navbar-nav > li > a {
+	padding: 0;
+	margin: 15px;
+	border-bottom: 1px solid transparent;
+	color: #355C7D;
+	transition: ease-in 0.2s;
+	margin-top: 25px;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+	border-bottom: 1px solid #355C7D;
+	color: #355C7D;
+}
+
+.navbar-default .navbar-nav > li > a:focus {
+	border-bottom: 1px solid #355C7D;
+	color: #355C7D;
+}
+
+.navbar-default .navbar-brand {
+	font-family: Days One;
+	font-size: 28px;	
+	margin-top: 10px;
+	color: #8BC34A;
+	transition: ease-in 0.2s; 	
+} 
+
+.navbar-default .navbar-brand:hover {
+	color: #689F38;	
+} 
+
+.navbar-default .navbar-brand:focus {
+	color: #689F38;	
+} 
+
+.navbar-collapse {
+	background-color: #fff;
+}
+
+.navbar-toggle {
+	border-radius: 0;
+	margin-top: 5px;
+}
+
+.navbar-toggle:hover {
+	background-color: black !important;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: black;
+}
+
+/* League item styles */
+.league-card {
+	background-color: #fff;
+	padding: 10px;
+	height: 200px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.league-card:hover {
+	cursor: pointer;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.20), 0 2px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-img {
+    position: relative;
+    display: block;
+    max-width: 100%;
+    max-height: 130px;
+}
+
+.flag-icon-background {
+	width: 20px !important;
+}
+
+@-webkit-keyframes bounce { 
+	0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
+	40% {-webkit-transform: translateY(-30px);} 
+	60% {-webkit-transform: translateY(-15px);} 
+} 
+         
+@keyframes bounce { 
+	0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+	40% {transform: translateY(-30px);} 
+	60% {transform: translateY(-15px);} 
+}
+         
+.bounce { 
+	-webkit-animation: bounce 2s; 
+	animation: bounce 2s; 
+}
