@@ -19,7 +19,7 @@ class App extends React.Component {
 class Navbar extends React.Component {
 	render() {
 		var navigationLinks = (<ul className="nav navbar-nav navbar-right">
-									<li><Link to={"/Leagues"}>Leagues</Link></li>
+									<li><Link to={"#Leagues"}>Leagues</Link></li>
 									<li><Link to="/Courses">Create New League</Link></li>
 								</ul>);
 	
@@ -57,7 +57,7 @@ class ListLeagues extends React.Component {
 				this.setState({leagues: data});
 			}.bind(this),
 			error: function(xhr, status, err) {
-				console.log(this.props.url, status, err.toString());
+				console.error(this.props.url, status, err.toString());
 			}.bind(this)
 		});
 	}
@@ -70,7 +70,7 @@ class ListLeagues extends React.Component {
     		 				{
     		 					this.state.leagues.map(
     		 						item => ( 
-    		 							<div id={ item._id } className="mt-20 league-card">
+    		 							<div key={ item._id } className="mt-20 league-card">
     		 								<LeagueItem item={ item } />
 		 									<SeeMoreLeagueDetails id={ item._id } />
 		 								</div>)	
@@ -131,7 +131,7 @@ class LeagueDetail extends React.Component {
 	}
 
 	componentWillMount() {
-		var URL = "/api/soccerLeagues/" + this.state.id; 
+		var URL = "/api/soccerLeagues/" + this.state.id;
 		$.ajax({
 			type: "GET",
 			url: URL,
@@ -165,7 +165,7 @@ class LeagueDetail extends React.Component {
 class RedditContainer extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { results: [] };
+		this.state = { results: [], tweets: [] };
 
 	}
 
@@ -173,7 +173,6 @@ class RedditContainer extends React.Component {
 		var API_URL = "https://www.reddit.com/r/soccer/search.json?";
 		var PARAMETERIZED_URL = API_URL + "q=transfers " + this.props.query + "&sort=" + "new&limit=10";
 
-		console.log(PARAMETERIZED_URL);
 		$.ajax({
 			method: "GET",
 			url: PARAMETERIZED_URL,
@@ -181,7 +180,22 @@ class RedditContainer extends React.Component {
 			cache: false,
 			success: function(data) {
 				this.setState({ results: data.data.children });
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.error(this.props.url, status, err.toString());
+			}.bind(this)
+		});
+
+		var TWEETS_URL = "/api/tweets/" + this.props.query;
+
+		$.ajax({
+			method: "GET",
+			url: TWEETS_URL,
+			dataType: "json",
+			cache: false,
+			success: function(data) {
 				console.log(data);
+				this.setState({ tweets: data.statuses });
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
@@ -190,23 +204,32 @@ class RedditContainer extends React.Component {
 	}
 
 	render() {
-		console.log(this.state.results.length);
-		console.log(this.state.results);
-		if(this.state.results.length > 0) {
-			return (<div>
-					{ 
-						this.state.results.map(
-							item => (<div>
-										<h4 className="news-title">{item.data.title}</h4>
-										<img className="small-image" src="/images/reddit.png" />
-										<br/>
-										<a className="news-link" href={"https://www.reddit.com" + item.data.permalink} target="_blank">See more</a>
-										<hr/>
-									</div>
-							)
-						) 
-					}
-				</div>);
+		if(this.state.results.length > 0 && this.state.tweets.length > 0) {
+			return (<div className="row">
+						<div className="col-md-6">
+							<img className="small-image" src="/images/reddit.png" />
+							{ 
+							this.state.results.map(
+								item => (<div className="news-card" key={item.data.id}>
+											<h4 className="news-title">{item.data.title}</h4>
+											<br/>
+											<a className="btn btn-reddit" href={"https://www.reddit.com" + item.data.permalink} target="_blank">See more</a>
+										</div>)
+								)
+							}
+						</div>
+						<div className="col-md-6">
+							<img className="small-image" src="/images/twitter.png" />
+							{ 
+							this.state.tweets.map(
+								item => (<div className="news-card" key={item.id}>
+											<h4 className="news-title">{item.text}</h4>
+											<a className="btn btn-twitter" target="_blank" href={ "https://twitter.com/" + item.user.screen_name + "/statuses/" + item.id_str }>See more</a>
+										</div>)
+								)
+							}
+						</div>
+					</div>);
 		}else{
 			return (<div></div>);	
 		}
@@ -218,7 +241,7 @@ class RedditContainer extends React.Component {
 ReactDOM.render((<Router history={browserHistory}>
 					<Route path="/" component={App}>
 						<IndexRoute component={ListLeagues} />
-						<Route path="/Leagues" component={ListLeagues} />
+						<Route path="#Leagues" component={ListLeagues} />
 						<Route path="/Leagues/:id" component={LeagueDetail} />
 					</Route>
 				</Router>

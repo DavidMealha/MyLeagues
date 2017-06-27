@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var path = require("path");
+var Twitter = require('twitter');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -44,7 +45,6 @@ conn.once('open', function() {
     	//GET /api/soccerLeagues
         .get(function(req, res) {
             SoccerLeague.findAll(function(err, leagues) {
-                console.log("inside find");
                 if (err)
                     res.send(err);
                 res.json(leagues);
@@ -70,11 +70,26 @@ conn.once('open', function() {
 
     router.route('/api/soccerLeagues/:league_id')
     	//GET /api/soccerLeagues/:league_name
-    	.get(function(req, res) {
+        //GET /api/soccerLeagues/:league_name
+        .get(function(req, res) {
             SoccerLeague.findById(req.params.league_id, function(err, leagueDetail) {
                 if (err)
                     res.send(err);
                 res.json(leagueDetail);
+            });
+        });
+
+    router.route('/api/tweets/:query')
+        .get(function(req, res) {
+            var client = new Twitter({
+                consumer_key: 'zw0js8oFmzOw9Rxe3vY9HojKh',
+                consumer_secret: '6lPJ5co31aJ4x187is7zcsn8n1C8g7gQcUJuGOGJjLR5CX9alM',
+                access_token_key: '879728003500126209-C1ztQycl3ChxPYcMyigJRlENsM6aNKc',
+                access_token_secret: 'LdmCWIhFjCaDvw3vyu9XfL6y2oSDJM7s2DJEl0v7bJwqL'
+            });
+
+            client.get('search/tweets', {q: req.params.query, result_type: 'mixed'}, function(error, tweets, response){
+                res.json(tweets);
             });
         });
 

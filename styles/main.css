@@ -185,11 +185,41 @@ hr {
 }
 
 .news-title {
-	width: 80%;
 	display: inline-block;
 }
 
 .small-image {
-	margin-left: 15px;
+	margin-left: 40%;
 	height: 25px;
+}
+
+.news-card {
+	border: 1px solid lightgrey;
+	border-radius: 5px;
+	padding: 10px 20px;
+	margin: 10px;
+}
+
+.btn-twitter {
+	background-color: #fff;
+	color: #1a8bf0;
+	transition: ease-in 0.2s;
+	border: 1px solid #1a8bf0;
+}
+
+.btn-twitter:hover {
+	background-color: #1a8bf0;
+	color: #fff;
+}
+
+.btn-reddit {
+	background-color: #fff;
+	color: #FF5700;
+	transition: ease-in 0.2s;
+	border: 1px solid #FF5700;
+}
+
+.btn-reddit:hover {
+	background-color: #FF5700;
+	color: #fff;
 }
