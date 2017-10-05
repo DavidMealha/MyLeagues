@@ -17,15 +17,15 @@ var port = process.env.PORT || 8080;
 app.listen(port);
 
 //connect to database
-//var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost:27017/soccerDB');
-//mongoose.connect("mongodb://User:user@ds139122.mlab.com:39122/myleaguestransferseu");
-//var conn = mongoose.connection;
+mongoose.connect("mongodb://User:user@ds139122.mlab.com:39122/myleaguestransferseu");
+var conn = mongoose.connection;
 
-//var SoccerLeague = require("./app/models/soccerLeague");
+var SoccerLeague = require("./app/models/soccerLeague");
 console.dir(ip.address());
 
-//conn.once('open', function() {
+conn.once('open', function() {
 //routing
   
   var router = express.Router();
@@ -37,12 +37,12 @@ console.dir(ip.address());
     });
 
     router.get('/',function(req,res){
-    	//fs.readFile('index.html', function (err, html) {
+    	fs.readFile('index.html', function (err, html) {
              res.writeHeader(200, {"Content-Type": 'text/html'});
              res.write(html);
              res.end();
-	console.log("Running server");
-        //});
+	     console.log("Running server");
+        });
     });
 
     router.route('/api/soccerLeagues')
@@ -97,7 +97,7 @@ console.dir(ip.address());
             client.get('search/tweets', {q: query, result_type: 'recent popular mixed', count: 25}, function(error, tweets, response){
                 res.json(tweets);
             });
-//        });
+        });
 
     app.use('/', router);
 
