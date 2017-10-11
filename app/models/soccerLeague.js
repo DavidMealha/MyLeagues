@@ -2,14 +2,17 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var SoccerLeagueSchema = new Schema({
+    id: Schema.Types.ObjectId,
     name: String,
     nrTeams: Number,
     division: Number,
     startDate: Date,
     endDate: Date,
+    image: String,
     country: {
     	name: String,
-    	population: Number
+    	population: Number,
+   	code: String
     }
 });
 

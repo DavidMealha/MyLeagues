@@ -18,8 +18,8 @@ app.listen(port);
 
 //connect to database
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost:27017/soccerDB');
-mongoose.connect("mongodb://User:user@ds139122.mlab.com:39122/myleaguestransferseu");
+mongoose.connect('mongodb://192.168.56.136:27017/myleaguestransferseu');
+//mongoose.connect("mongodb://User:user@ds139122.mlab.com:39122/myleaguestransferseu");
 var conn = mongoose.connection;
 
 var SoccerLeague = require("./app/models/soccerLeague");
