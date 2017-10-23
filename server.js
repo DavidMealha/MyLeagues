@@ -8,9 +8,9 @@ var ip = require("ip");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(__dirname, '\\scripts'));
-app.use(express.static(__dirname, '\\plugins'));
-app.use(express.static(__dirname, '\\styles'));
+app.use(express.static(__dirname, '\\assets'));
+//app.use(express.static(__dirname, '\\plugins'));
+//app.use(express.static(__dirname, '\\styles'));
 
 
 var port = process.env.PORT || 8080;
