@@ -171,7 +171,7 @@ class RedditContainer extends React.Component {
 
 	componentWillMount() {
 		var API_URL = "https://www.reddit.com/r/soccer/search.json?";
-		var PARAMETERIZED_URL = API_URL + "q=transfers " + this.props.query + "&sort=" + "new&limit=25";
+		var PARAMETERIZED_URL = API_URL + "q= " + this.props.query + "&sort=" + "new&limit=25";
 
 		$.ajax({
 			method: "GET",
