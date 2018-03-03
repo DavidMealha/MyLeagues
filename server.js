@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var path = require("path");
 var Twitter = require('twitter');
-var ip = require("ip");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -23,7 +22,6 @@ mongoose.connect("mongodb://User:user@ds139122.mlab.com:39122/myleaguestransfers
 var conn = mongoose.connection;
 
 var SoccerLeague = require("./app/models/soccerLeague");
-console.dir(ip.address());
 
 conn.once('open', function() {
 //routing
