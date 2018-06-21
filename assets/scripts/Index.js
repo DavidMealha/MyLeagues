@@ -4,6 +4,7 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 var browserHistory = ReactRouter.browserHistory;
+var hashHistory = ReactRouter.hashHistory;
 
 class App extends React.Component {
 	render() {
@@ -19,8 +20,8 @@ class App extends React.Component {
 class Navbar extends React.Component {
 	render() {
 		var navigationLinks = (<ul className="nav navbar-nav navbar-right">
-									<li><Link to={"#Leagues"}>Leagues</Link></li>
-									<li><Link to="/Courses">Create New League</Link></li>
+									<li><Link to={"/Leagues"}>Leagues</Link></li>
+									<li><Link to="/AddLeague">Create New League</Link></li>
 								</ul>);
 	
 		return (<nav className="navbar navbar-default navbar-fixed-top navbar-home">
@@ -68,12 +69,11 @@ class ListLeagues extends React.Component {
 					<div className="row">
 						<div className="col-md-12">
     		 				{
-    		 					this.state.leagues.map(
-    		 						item => ( 
-    		 							<div key={ item._id } className="mt-20 league-card">
-    		 								<LeagueItem item={ item } />
-		 									<SeeMoreLeagueDetails id={ item._id } />
-		 								</div>)	
+    		 					this.state.leagues.map(item => ( 
+									<div key={ item._id } className="mt-20 league-card">
+										<LeagueItem item={ item } />
+										<SeeMoreLeagueDetails id={ item._id } />
+									</div>)	
 			            		)
     		 				}
     		 			</div>
@@ -148,15 +148,15 @@ class LeagueDetail extends React.Component {
 	render() {
 		if(this.state.league.name){
 			return (<div className="container">
-					<div className="row">
-						<div className="col-md-12">
-							<div className="mt-20 league-card">
-								<LeagueItem item={this.state.league} />
-								<RedditContainer query={this.state.league.name} />
+						<div className="row">
+							<div className="col-md-12">
+								<div className="mt-20 league-card">
+									<LeagueItem item={this.state.league} />
+									<RedditContainer query={this.state.league.name} />
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>);	
+					</div>);	
 		}
 		return (<div></div>);
 	}
@@ -166,7 +166,6 @@ class RedditContainer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { results: [], tweets: [] };
-
 	}
 
 	componentWillMount() {
@@ -238,10 +237,10 @@ class RedditContainer extends React.Component {
 }
 
 
-ReactDOM.render((<Router history={browserHistory}>
+ReactDOM.render((<Router history={hashHistory}>
 					<Route path="/" component={App}>
 						<IndexRoute component={ListLeagues} />
-						<Route path="#Leagues" component={ListLeagues} />
+						<Route path="/Leagues" component={ListLeagues} />
 						<Route path="/Leagues/:id" component={LeagueDetail} />
 					</Route>
 				</Router>

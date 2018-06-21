@@ -8,25 +8,20 @@ var Twitter = require('twitter');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname, '\\assets'));
-//app.use(express.static(__dirname, '\\plugins'));
-//app.use(express.static(__dirname, '\\styles'));
-
 
 var port = process.env.PORT || 8080;
 app.listen(port);
 
-//connect to database
 var mongoose = require('mongoose');
 //mongoose.connect('mongodb://192.168.56.136:27017/myleaguestransferseu');
 mongoose.connect("mongodb://User:user@ds139122.mlab.com:39122/myleaguestransferseu");
-var conn = mongoose.connection;
 
+var conn = mongoose.connection;
 var SoccerLeague = require("./app/models/soccerLeague");
 
 conn.once('open', function() {
-//routing
-  
-  var router = express.Router();
+
+    var router = express.Router();
 
     router.use(function(req, res, next) {
         // do logging
@@ -36,15 +31,14 @@ conn.once('open', function() {
 
     router.get('/',function(req,res){
     	fs.readFile('index.html', function (err, html) {
-             res.writeHeader(200, {"Content-Type": 'text/html'});
-             res.write(html);
-             res.end();
-	     console.log("Running server");
+            res.writeHeader(200, {"Content-Type": 'text/html'});
+            res.write(html);
+            res.end();
+	        console.log("Running server");
         });
     });
 
     router.route('/api/soccerLeagues')
-    	//GET /api/soccerLeagues
         .get(function(req, res) {
             SoccerLeague.findAll(function(err, leagues) {
                 if (err)
@@ -52,7 +46,7 @@ conn.once('open', function() {
                 res.json(leagues);
             });
         })
-        //POST /api/soccerLeagues
+        
         .post(function(req, res){
         	var soccerLeague = new SoccerLeague();
         	soccerLeague.name = req.body.name;
@@ -71,8 +65,6 @@ conn.once('open', function() {
         });
 
     router.route('/api/soccerLeagues/:league_id')
-    	//GET /api/soccerLeagues/:league_name
-        //GET /api/soccerLeagues/:league_name
         .get(function(req, res) {
             SoccerLeague.findById(req.params.league_id, function(err, leagueDetail) {
                 if (err)
@@ -98,5 +90,4 @@ conn.once('open', function() {
         });
 
     app.use('/', router);
-
 });
