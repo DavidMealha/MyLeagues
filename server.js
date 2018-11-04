@@ -14,7 +14,7 @@ app.listen(port);
 
 var mongoose = require('mongoose');
 //mongoose.connect('mongodb://192.168.56.136:27017/myleaguestransferseu');
-mongoose.connect("mongodb://User:user@ds139122.mlab.com:39122/myleaguestransferseu");
+mongoose.connect(process.env.DATABASE_CONN);
 
 var conn = mongoose.connection;
 var SoccerLeague = require("./app/models/soccerLeague");
@@ -76,10 +76,10 @@ conn.once('open', function() {
     router.route('/api/tweets/:query')
         .get(function(req, res) {
             var client = new Twitter({
-                consumer_key: 'zw0js8oFmzOw9Rxe3vY9HojKh',
-                consumer_secret: '6lPJ5co31aJ4x187is7zcsn8n1C8g7gQcUJuGOGJjLR5CX9alM',
-                access_token_key: '879728003500126209-C1ztQycl3ChxPYcMyigJRlENsM6aNKc',
-                access_token_secret: 'LdmCWIhFjCaDvw3vyu9XfL6y2oSDJM7s2DJEl0v7bJwqL'
+                consumer_key: process.env.CONSUMER_KEY,
+                consumer_secret: process.env.CONSUMER_SECRET,
+                access_token_key: process.env.ACCESS_TOKEN_KEY,
+                access_token_secret: process.env.ACCESS_TOKEN_SECRET
             });
 
             var query = req.params.query + " filter:verified exclude:replies exclude:retweets"
